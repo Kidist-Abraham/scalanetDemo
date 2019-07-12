@@ -81,4 +81,43 @@ object scalanet extends ScalaModule with PublishModule {
       super.runMain("org.scalatest.run", args: _*)
     }
   }
+ object alice extends ScalaModule {
+  //  def moduleDeps = Seq(scalanet)
+    def scalaVersion = "2.12.7"
+ override def ivyDeps = Agg(
+      ivy"org.scalatest::scalatest:3.0.5",
+      ivy"org.scalacheck::scalacheck:1.14.0",
+      ivy"ch.qos.logback:logback-core:1.2.3",
+      ivy"ch.qos.logback:logback-classic:1.2.3"
+    )
+
+    override def moduleDeps: Seq[JavaModule] = super.moduleDeps ++ Seq(scalanet)
+ override def repositories =
+    super.repositories ++ Seq(
+      MavenRepository("https://oss.sonatype.org/content/repositories/releases"),
+      MavenRepository("https://oss.sonatype.org/content/repositories/snapshots")
+    )
+
+
+  }
+
+object bob extends ScalaModule {
+  //  def moduleDeps = Seq(scalanet)
+    def scalaVersion = "2.12.7"
+ override def ivyDeps = Agg(
+      ivy"org.scalatest::scalatest:3.0.5",
+      ivy"org.scalacheck::scalacheck:1.14.0",
+      ivy"ch.qos.logback:logback-core:1.2.3",
+      ivy"ch.qos.logback:logback-classic:1.2.3"
+    )
+
+    override def moduleDeps: Seq[JavaModule] = super.moduleDeps ++ Seq(scalanet)
+ override def repositories =
+    super.repositories ++ Seq(
+      MavenRepository("https://oss.sonatype.org/content/repositories/releases"),
+      MavenRepository("https://oss.sonatype.org/content/repositories/snapshots")
+    )
+
+
+  }
 }
