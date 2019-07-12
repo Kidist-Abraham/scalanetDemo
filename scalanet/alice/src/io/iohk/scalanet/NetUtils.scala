@@ -26,7 +26,7 @@ val bobAddr: InetAddress = InetAddress.getByName("172.31.23.19");
   def aliceAddress(): InetSocketAddress = {
     val s = new ServerSocket(8080)
     try {
-      new InetSocketAddress("localhost", s.getLocalPort)
+      new InetSocketAddress(aliceAddr, s.getLocalPort)
     } finally {
       s.close()
     }
@@ -34,7 +34,7 @@ val bobAddr: InetAddress = InetAddress.getByName("172.31.23.19");
   def bobAddress(): InetSocketAddress = {
     val s = new ServerSocket(8081)
     try {
-      new InetSocketAddress("localhost", s.getLocalPort)
+      new InetSocketAddress(bobAddr, s.getLocalPort)
     } finally {
       s.close()
     }

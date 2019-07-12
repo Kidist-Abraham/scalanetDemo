@@ -26,7 +26,7 @@ Thread.sleep(2000)
 
   implicit val patienceConfig: ScalaFutures.PatienceConfig = PatienceConfig(25 seconds)
   implicit val codec = new FramingCodec(Codec[String])
-
+val aliceAddr: InetAddress = InetAddress.getByName("172.31.19.22");
      val bob = bobTCPPeerGroup[String]
   //   val alice = aliceTCPPeerGroup[String]
 
@@ -40,7 +40,7 @@ Thread.sleep(2000)
        
 
       //b.server().foreachL(channel => channel.sendMessage(bMessage).evaluated).runAsync
-      val bobClient = bob.client(new InetMultiAddress(new InetSocketAddress("localhost",8080))).evaluated //   def client(to: A): Task[Channel[A, M]]
+      val bobClient = bob.client(new InetMultiAddress(new InetSocketAddress(aliceAddr,8080))).evaluated //   def client(to: A): Task[Channel[A, M]]
  // println("It reach here")
       bobClient.sendMessage(bobMessage).evaluated
       val bobReceived : Future[String]= bobClient.in.headL.runAsync
